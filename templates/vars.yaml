@@ -4,9 +4,9 @@ description: |-
   A docker image for testing docker containers, includes dgoss and dcgoss.
 github:
   user: joeblackwaslike
-  org: joeblackwaslike
+  org: telephoneorg
   repo: dcgoss
 docker:
   user: joeblackwaslike
-  org: joeblackwaslike
+  org: telephoneorg
   repo: dcgoss

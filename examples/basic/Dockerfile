@@ -1,4 +1,4 @@
-FROM    joeblackwaslike/debian:stretch
+FROM    telephoneorg/debian:stretch
 
 RUN     echo hello > /tmp/test-file
 
