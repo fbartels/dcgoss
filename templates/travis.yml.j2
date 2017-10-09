@@ -4,7 +4,7 @@ target: .travis.yml
 {% set github_user = data.get('vars')['github']['user'] -%}
 {% set github_org = data.get('vars')['github']['org'] -%}
 {% set docker_user = data.get('vars')['docker']['user'] -%}
-{% set docker_org = data.get('vars')['docker']['user'] -%}
+{% set docker_org = data.get('vars')['docker']['org'] -%}
 {% if docker_user == 'joeblackwaslike' -%}
   {% set docker_pass = env.get('DOCKER_PASS_JOEBLACKWASLIKE') -%}
 {% endif %}

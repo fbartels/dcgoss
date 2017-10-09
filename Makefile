@@ -1,12 +1,12 @@
 SHELL := /bin/bash
 
 GITHUB_USER ?= joeblackwaslike
-GITHUB_ORG ?= joeblackwaslike
+GITHUB_ORG ?= telephoneorg
 GITHUB_REPO := docker-dcgoss
 GITHUB_TAG = $(shell git tag | sort -n | tail -1)
 
 DOCKER_USER ?= joeblackwaslike
-DOCKER_ORG ?= joeblackwaslike
+DOCKER_ORG ?= telephoneorg
 DOCKER_REPO := dcgoss
 DOCKER_TAG := latest
 DOCKER_IMAGE := $(DOCKER_ORG)/$(DOCKER_REPO):$(DOCKER_TAG)
