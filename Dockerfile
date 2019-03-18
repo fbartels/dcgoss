@@ -1,41 +1,25 @@
-FROM    telephoneorg/debian:stretch
+ARG DOCKER_VERSION=18.09.1
+FROM docker:${DOCKER_VERSION}
 
-MAINTAINER Joe Black <me@joeblack.nyc>
+ARG DGOSS_VERSION
+ARG COMPOSE_VERSION
+ENV DGOSS_VERSION=${DGOSS_VERSION:-0.3.6}
+ENV COMPOSE_VERSION=${DOMPOSE_VERSION:-1.23.2}
 
-ARG     DOCKER_VERSION
-ARG     DGOSS_VERSION
+RUN apk add --no-cache bash py-pip dumb-init
+RUN pip install --no-cache-dir docker-compose==${COMPOSE_VERSION}
 
-ENV     DOCKER_VERSION=${DOCKER_VERSION:-17.03.0}
-ENV     DGOSS_VERSION=${DGOSS_VERSION:-0.3.4}
+ADD https://github.com/aelsabbahy/goss/releases/download/v${DGOSS_VERSION}/dgoss /usr/local/bin/
+RUN chmod 0755 /usr/local/bin/dgoss
 
-RUN     apt-get update -qq && \
-            apt-get install -y curl ca-certificates && \
-            apt-clean --aggressive && \
-            cd /tmp && \
-            curl -LO https://get.docker.com/builds/Linux/x86_64/docker-${DOCKER_VERSION}-ce.tgz && \
-            tar -xzvf docker-${DOCKER_VERSION}-ce.tgz && \
-            chmod +x docker/docker && \
-            mv docker/docker /usr/local/bin/ && \
-            rm -rf docker*
+COPY build/dcgoss /usr/local/bin/
 
-RUN     apt-get update -qq && \
-            apt-get install -y python3 python3-pip && \
-            apt-clean --aggressive
-
-RUN     pip3 install --upgrade requests pip setuptools && \
-            pip3 install docker-compose
-
-ADD     https://github.com/aelsabbahy/goss/releases/download/v${DGOSS_VERSION}/dgoss /usr/local/bin/
-RUN     chmod 0755 /usr/local/bin/dgoss
-
-COPY    build/dcgoss /usr/local/bin/
-
-VOLUME  ["/repo"]
+VOLUME ["/repo"]
 
 WORKDIR /repo
 
-ENV     GOSS_FILES_PATH tests
+ENV GOSS_FILES_PATH tests
 
 ENTRYPOINT ["/dumb-init", "--"]
 
-CMD     ["dcgoss"]
+CMD ["dcgoss"]
