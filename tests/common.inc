@@ -5,7 +5,7 @@ TESTDIR=$(realpath $BASEDIR)
 IMAGE=${DOCKER_ORG:-telephoneorg}/dcgoss:latest
 COMMAND=$(basename $0)
 
-docker pull $IMAGE
+#docker pull $IMAGE
 docker run -it --rm \
     -v /var/run/docker.sock:/var/run/docker.sock \
     -v $TESTDIR:/tests \
