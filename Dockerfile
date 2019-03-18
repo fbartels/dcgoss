@@ -22,7 +22,7 @@ VOLUME ["/repo"]
 
 WORKDIR /repo
 
-ENV GOSS_FILES_PATH tests
+ENV GOSS_FILES_PATH /tests
 
 ENTRYPOINT ["dumb-init", "--"]
 

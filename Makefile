@@ -19,14 +19,14 @@ build:
 	docker build --force-rm -t $(DOCKER_IMAGE) .
 
 build-test:
-	tests/edit $(DOCKER_IMAGE) tail -f /dev/null
+	bash -x tests/edit $(DOCKER_IMAGE) tail -f /dev/null
 
 templates:
 	tmpld --strict --data=templates/vars.yaml \
 		$(shell find templates -type f -name '*.j2' | xargs)
 
 test:
-	tests/run $(DOCKER_IMAGE) tail -f /dev/null
+	bash -x tests/run $(DOCKER_IMAGE) tail -f /dev/null
 
 push-image:
 	if [[ $$TRAVIS == 'true' ]]; then \
